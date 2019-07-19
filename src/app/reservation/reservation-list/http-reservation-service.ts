@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 export class HttpReservationService{
 
-    url = "http://localhost:8080/reservation/list";
+    url = "http://localhost:8080/api/reservations";
     constructor(private http: HttpClient){}
 
     byId(id: number) : Observable<Reservation>{
@@ -14,5 +14,10 @@ export class HttpReservationService{
 
     getAll(): Observable<Reservation[]>{
         return this.http.get<Reservation[]>(this.url);
+    }
+
+    delete(id: number) : Observable<{}> {
+        const url = `http://localhost:8080/api/reservations/${id}`;
+        return this.http.delete(url);
     }
 }
