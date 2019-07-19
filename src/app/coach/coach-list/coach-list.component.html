@@ -1,0 +1,23 @@
+<p>reservation-list works!</p>
+<table *ngIf="reservations && reservations.length" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>firstname</th>
+            <th>lastname</th>
+            <th>age</th>
+            <th>sex</th>
+            <th>bio</th>           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let r of reservations">
+            <td>{{ cs.id }}</td>
+            <td>{{ cs.firstname }}</td>
+            <td>{{ cs.age }}</td>
+            <td>{{ cs.sex }}</td>
+            <td>{{ cs.bio }}</td>                  
+        </tr>
+    </tbody>
+</table>

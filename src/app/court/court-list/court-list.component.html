@@ -1,0 +1,22 @@
+<table *ngIf="courts && courts.length" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Court name</th>
+            <th>Surface type</th>
+            <th>Number of players</th>
+            <th>Cost (€)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of courts">
+            <td>{{ c.id }}</td>
+            <td>{{ c.name }}</td>
+            <td>{{ c.surface }}</td>
+            <td>{{ c.numplayer }}</td>
+            <td>{{ c.cost }}</td>
+            <td><a [routerLink]="['/courts', c.id]" class = "btn btn-primary">Update reservation</a></td>
+        </tr>
+    </tbody>
+</table>
