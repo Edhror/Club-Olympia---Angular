@@ -6,6 +6,7 @@
             <th>End time</th>
             <th>Court name</th>
             <th>Client name</th>
+            <th>Coach name</th>
             <th>Cost (€)</th>
             <th></th>
             <th></th>
@@ -18,6 +19,7 @@
             <td>{{ r.end | date : 'short' }}</td>
             <td>{{ r.courtName }}</td>
             <td>{{ r.clientName }}</td>
+            <td>{{ r.coachName }}</td>
             <td>{{ r.cost }}</td>
             <td><a [routerLink]="['/reservations']" (click)="delete(r.id)"class = "btn btn-primary">Delete reservation</a></td>
             <td><a [routerLink]="['/reservations', r.id]" class = "btn btn-primary">Update reservation</a></td>
