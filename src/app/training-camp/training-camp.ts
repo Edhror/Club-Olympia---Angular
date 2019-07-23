@@ -1,7 +1,7 @@
 import { Coach } from '../coach/coach-list/coach';
 import { Reservation } from '../reservation/reservation-list/reservation';
 
-export class TrainingCourt{
+export class TrainingCamp{
 
 
     constructor(private _id: number, private _start: String, private _end: String, private _cost: number,

@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import {RouterModule} from '@angular/router';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { CourtListComponent } from './court/court-list/court-list.component';
 import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
@@ -11,7 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpReservationService } from './reservation/reservation-list/http-reservation-service';
 import { HttpCourtService } from './court/court-list/http-court-service';
 import { ReservationUpdateComponent } from './reservation/reservation-update/reservation-update.component';
-import { TrainingCourtListComponent } from './training-court/training-court-list.component';
+import { TrainingCampListComponent } from './training-camp/training-camp-list.component';
+import { HttpTrainingCampService } from './training-camp/http-training-camp-service';
+import { TrainingCampUpdateComponent } from './training-camp/training-camp-update/training-camp-update.component';
 
 @NgModule({
   declarations: [
@@ -20,25 +22,27 @@ import { TrainingCourtListComponent } from './training-court/training-court-list
     ReservationListComponent,
     HomeComponent,
     ReservationUpdateComponent,
-    TrainingCourtListComponent,
+    TrainingCampListComponent,
+    TrainingCampUpdateComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path: 'home', component: HomeComponent},
-      { path: 'reservations', component: ReservationListComponent},
-      { path: 'reservations/:id', component: ReservationUpdateComponent},
-      { path: 'courts', component: CourtListComponent},
-      { path: 'training-court', component: TrainingCourtListComponent},
-      {path: '', redirectTo: 'home', pathMatch: 'full'},
-      {path: '**', redirectTo: 'home', pathMatch: 'full'}
+      { path: 'home', component: HomeComponent },
+      { path: 'reservations', component: ReservationListComponent },
+      { path: 'reservations/:id', component: ReservationUpdateComponent },
+      { path: 'courts', component: CourtListComponent },
+      { path: 'training-camp', component: TrainingCampListComponent },
+      { path: 'training-camp/:id', component: TrainingCampUpdateComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ]),
-    
+
   ],
-  providers: [ HttpReservationService, HttpCourtService ],
+  providers: [HttpReservationService, HttpCourtService, HttpTrainingCampService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

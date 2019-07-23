@@ -1,0 +1,34 @@
+<input type="datetime-local"  [(ngModel)]= 'start'>
+<input type="datetime-local"  [(ngModel)]= 'end'>
+<select [(ngModel)]= 'tipo'>
+        <option value="TENNIS">Tennis</option>
+        <option value="CALCIO">Calcio</option>
+        <option value="BEACH_VOLLEY">Beach Volley</option>
+</select>
+<button (click)="filterCamps()">Filter</button>
+<table *ngIf="trainingCamps && trainingCamps.length" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Coach name</th>
+            <th>Coach id</th>
+            <th>Cost (€)</th>
+            <th>Tipo sport</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let t of trainingCamps">
+            <td>{{ t.id }}</td>
+            <td>{{ t.start | date : 'short' }}</td>
+            <td>{{ t.end | date : 'short' }}</td>
+            <td>{{ t.coachDto.coachName }}</td>
+            <td>{{ t.coachDto.id }}</td>
+            <td>{{ t.cost }}</td>
+            <td>{{t.tipoSport}}</td>
+            <td><a [routerLink]="['/training-camp']" (click)="delete(t.id)"class = "btn btn-primary">Delete camp</a></td>
+            <td><a [routerLink]="['/training-camp', t.id]" class = "btn btn-primary">Update camp</a></td>
+        </tr>
+    </tbody>
+</table>

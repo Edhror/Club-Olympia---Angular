@@ -1,0 +1,107 @@
+
+<div class="panel-body">
+    <form class="form-horizontal"
+    novalidate
+    *ngIf = "trainingCamp"
+    (ngSubmit)="update(updateForm)"
+    #updateForm="ngForm"> 
+    
+    <fieldset>
+        <div class="form-group"
+        [ngClass]="{ 'has-error': (startTime.touched || startTime.dirty) && !startTime.valid }">
+            <label class="col-md-2 control-label" for="startTimeId">Start Time</label>
+            <div class="col-md-8">
+                <input class="form-control" 
+                id="startTimeId" 
+                type="datetime-local"
+                required
+                [(ngModel)] = "trainingCamp.start"
+                name="startTime"
+                #startTime="ngModel"/>
+                <span class="help-block" *ngIf="(startTime.touched || startTime.dirty) && startTime.errors">
+                        <span *ngIf="startTime.errors.required">
+                            Please enter start time.
+                        </span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="form-group"
+        [ngClass]="{ 'has-error': (endTime.touched || endTime.dirty) && !endTime.valid }">
+            <label class="col-md-2 control-label" for="endTimeId">End Time</label>
+            <div class="col-md-8">
+                <input class="form-control" 
+                id="endTimeId" 
+                type="datetime-local"
+                required
+                [(ngModel)] = "trainingCamp.end"
+                name="endTime"
+                #endTime="ngModel"/>
+                <span class="help-block" *ngIf="(endTime.touched || endTime.dirty) && endTime.errors">
+                        <span *ngIf="endTime.errors.required">
+                            Please enter end time.
+                        </span>
+                 </span>
+            </div>
+        </div>
+
+
+        <div class="form-group"
+        [ngClass]="{ 'has-error': (cost.touched || cost.dirty) && !cost.valid }">
+            <label class="col-md-2 control-label" for="costId">Cost (€)</label>
+            <div class="col-md-8">
+                <input class="form-control" 
+                id="costId" 
+                type="text"
+                required
+                [(ngModel)] = "trainingCamp.cost"
+                name="cost"
+                #cost="ngModel"/>
+                <span class="help-block" *ngIf="(cost.touched || cost.dirty) && cost.errors">
+                        <span *ngIf="cost.errors.required">
+                            Please enter cost.
+                        </span>
+                 </span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="sportTypeId">Sport Type</label>
+            <div class="col-md-8">
+                <select [(ngModel)]='trainingCamp.tipoSport' name="tipoSport">
+                        <option value="CALCIO">Calcio</option>
+                        <option value="TENNIS">Tennis</option> 
+                        <option value="BEACH_VOLLEY">Beach Volley</option>
+                </select>
+            </div>
+        </div>
+
+<!--Da modificare-->
+        <div class="form-group">
+                <label class="col-md-2 control-label" for="sportTypeId">Sport Type</label>
+                <div class="col-md-8">
+                    <select [(ngModel)]='trainingCamp.tipoSport' name="tipoSport">
+                            <option value="CALCIO">Calcio</option>
+                            <option value="TENNIS">Tennis</option> 
+                            <option value="BEACH_VOLLEY">Beach Volley</option>
+                    </select>
+                </div>
+            </div>
+
+        <div class="form-group">
+                <div class="col-md-4 col-md-offset-2">
+                    <span>
+                        <button class="btn btn-primary"
+                                type="submit"
+                                [disabled]="!updateForm.valid">
+                            Save
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+    </fieldset>
+
+    </form>
+</div>
