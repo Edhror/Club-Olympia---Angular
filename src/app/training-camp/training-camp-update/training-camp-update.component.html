@@ -79,12 +79,10 @@
 
 <!--Da modificare-->
         <div class="form-group">
-                <label class="col-md-2 control-label" for="sportTypeId">Sport Type</label>
+                <label class="col-md-2 control-label" for="sportTypeId">Coach</label>
                 <div class="col-md-8">
-                    <select [(ngModel)]='trainingCamp.tipoSport' name="tipoSport">
-                            <option value="CALCIO">Calcio</option>
-                            <option value="TENNIS">Tennis</option> 
-                            <option value="BEACH_VOLLEY">Beach Volley</option>
+                    <select [(ngModel)]='trainingCamp.coachDto.id' name="coachId">
+                            <option *ngFor="let c of coaches" [value]="c.id">{{c.name}}</option>
                     </select>
                 </div>
             </div>
@@ -104,4 +102,19 @@
     </fieldset>
 
     </form>
+    <h3>Clienti iscritti</h3>
+    <table *ngIf="clients" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of clients">
+                <td>{{c.id}}</td>
+                <td>{{c.name}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

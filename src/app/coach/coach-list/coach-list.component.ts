@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Coach } from './coach';
-import { HttpCoachService } from './Http-coach-service';
+
+
+
+import { HttpCoachService } from '../http-coach-service';
+import { ItemForSelection } from '../item-for-selection';
 
 @Component({
     selector: 'app-coach-list',
@@ -9,7 +12,7 @@ import { HttpCoachService } from './Http-coach-service';
   })
 
 export class CoachListComponent implements OnInit {
-  coach:Coach [];
+  coaches:ItemForSelection [];
 
   constructor(private coachService: HttpCoachService) {
 
@@ -17,7 +20,8 @@ export class CoachListComponent implements OnInit {
 
   ngOnInit() {
     this.coachService.getAll().subscribe(
-      cs=> this.coach=cs
+      cs=> this.coaches=cs 
     );
+
   }
 }

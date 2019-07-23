@@ -1,4 +1,4 @@
-import { Coach } from '../coach/coach-list/coach';
+import { Coach } from '../coach/coach';
 import { Reservation } from '../reservation/reservation-list/reservation';
 
 export class TrainingCamp{

@@ -2,6 +2,7 @@
 import { TrainingCamp } from './training-camp';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ItemForSelection } from '../coach/item-for-selection';
 
 export class HttpTrainingCampService {
 
@@ -33,5 +34,10 @@ export class HttpTrainingCampService {
         let url = `${this.baseUrl}/${trainingCamp.id}`;
         const head = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.httpClient.put<void>(url, trainingCamp, {headers: head});
+    }
+
+    clientsByTrainingCamp(id : number) : Observable<ItemForSelection[]> {
+        let url = `${this.baseUrl}/${id}/clients`;
+        return this.httpClient.get<ItemForSelection[]>(url);
     }
 }

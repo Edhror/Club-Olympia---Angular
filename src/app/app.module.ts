@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpReservationService } from './reservation/reservation-list/http-reservation-service';
 import { HttpCourtService } from './court/court-list/http-court-service';
+import { HttpCoachService } from './coach/http-coach-service'; 
 import { ReservationUpdateComponent } from './reservation/reservation-update/reservation-update.component';
 import { TrainingCampListComponent } from './training-camp/training-camp-list.component';
 import { HttpTrainingCampService } from './training-camp/http-training-camp-service';
@@ -42,7 +43,7 @@ import { TrainingCampUpdateComponent } from './training-camp/training-camp-updat
     ]),
 
   ],
-  providers: [HttpReservationService, HttpCourtService, HttpTrainingCampService],
+  providers: [HttpReservationService, HttpCoachService, HttpCourtService, HttpTrainingCampService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-export class Coach{
+export class ItemForSelection{
 
 
     constructor(private _id: number, private _name: String){
