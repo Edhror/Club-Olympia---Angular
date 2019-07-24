@@ -108,12 +108,32 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let c of clients">
                 <td>{{c.id}}</td>
                 <td>{{c.name}}</td>
+                <td><button (click)="leaveCamp(c.id)">Cancel enrollment</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Clienti non iscritti</h3>
+    <table *ngIf="availableClients" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of availableClients">
+                <td>{{c.id}}</td>
+                <td>{{c.name}}</td>
+                <td><button (click)="enrollCamp(c.id)">Enroll</button></td>
             </tr>
         </tbody>
     </table>

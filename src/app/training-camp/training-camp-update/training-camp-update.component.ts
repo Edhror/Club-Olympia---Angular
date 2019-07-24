@@ -15,6 +15,7 @@ export class TrainingCampUpdateComponent implements OnInit {
   trainingCamp : TrainingCamp;
   coaches : ItemForSelection[];
   clients : ItemForSelection[];
+  availableClients :ItemForSelection[];
   constructor(private route: ActivatedRoute, private router: Router,
      private trainingCampService: HttpTrainingCampService,
      private coachService :HttpCoachService) { }
@@ -41,16 +42,35 @@ export class TrainingCampUpdateComponent implements OnInit {
         alert(e);
       }
      );
-     this.trainingCampService.clientsByTrainingCamp(id).subscribe(
-      cc => {
-        this.clients = cc;
-        console.log(cc)
-      },
-      e => {
-        console.log(e);
-        alert(e);
-      }
-     );
+
+     this.loadEnrolledClients(id);
+     this.loadAvailableClients(id);
+  }
+
+  loadEnrolledClients(id: number) {
+    this.trainingCampService.clientsByTrainingCamp(id).subscribe(
+     cc => {
+       this.clients = cc;
+       console.log(cc)
+     },
+     e => {
+       console.log(e);
+       alert(e);
+     }
+    );  
+  }
+
+  loadAvailableClients(id: number) {
+    this.trainingCampService.availableClientsByTrainingCamp(id).subscribe(
+     cc => {
+       this.availableClients = cc;
+       console.log(cc)
+     },
+     e => {
+       console.log(e);
+       alert(e);
+     }
+    );  
   }
 
   update(updateForm: NgForm): void{
@@ -61,6 +81,26 @@ export class TrainingCampUpdateComponent implements OnInit {
       e =>{
         console.log(e);
         alert(e);
+      }
+    );
+  }
+
+  leaveCamp (clientId: number) {
+    console.log(clientId,this.trainingCamp.id);
+    this.trainingCampService.leaveCamp(this.trainingCamp.id, clientId).subscribe(
+      () => {
+        this.loadEnrolledClients(this.trainingCamp.id)
+        this.loadAvailableClients(this.trainingCamp.id);
+      }
+    );
+  }
+
+  enrollCamp (clientId: number) {
+    console.log(clientId,this.trainingCamp.id);
+    this.trainingCampService.enrollCamp(this.trainingCamp.id, clientId).subscribe(
+      () => {
+        this.loadEnrolledClients(this.trainingCamp.id);
+        this.loadAvailableClients(this.trainingCamp.id);
       }
     );
   }
