@@ -1,3 +1,6 @@
+<input type="datetime-local"  [(ngModel)]= 'start'>
+<input type="datetime-local"  [(ngModel)]= 'end'>
+<button (click)="loadReservations()">Filter</button>
 <table *ngIf="reservations && reservations.length" class="table">
     <thead>
         <tr>

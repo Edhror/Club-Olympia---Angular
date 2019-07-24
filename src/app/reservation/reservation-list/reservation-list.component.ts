@@ -10,26 +10,27 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReservationListComponent implements OnInit {
 
+  start: string;
+  end: string;
   reservations: Reservation [];
 
   constructor(private route: ActivatedRoute,private reservationService: HttpReservationService) { }
 
   ngOnInit() {
 
-    this.getAll();
+    this.loadReservations();
       
   }
   delete(id:number): void {
 
-    this.reservationService.delete(id).subscribe(() => this.getAll());
+    this.reservationService.delete(id).subscribe(() => this.loadReservations());
   }
 
-  getAll(): void{
-    this.reservationService.getAll().subscribe(
+  loadReservations(): void{
+    this.reservationService.getReservations(this.start, this.end).subscribe(
       rss => { this.reservations=rss;
         console.log(this.reservations);
       }
     );
   }
-
 }

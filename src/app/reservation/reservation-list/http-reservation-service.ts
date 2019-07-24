@@ -12,8 +12,12 @@ export class HttpReservationService{
         return this.http.get<Reservation>(this.url + "/" + id);
     }
 
-    getAll(): Observable<Reservation[]>{
-        return this.http.get<Reservation[]>(this.url);
+    getReservations(start: string, end: string): Observable<Reservation[]>{
+        let searchUrl = this.url;
+        if(start && end){
+            searchUrl += `?start=${start}&end=${end}`;
+        }
+        return this.http.get<Reservation[]>(searchUrl);
     }
 
     delete(id: number) : Observable<{}> {
