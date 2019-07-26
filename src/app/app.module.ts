@@ -15,6 +15,10 @@ import { ReservationUpdateComponent } from './reservation/reservation-update/res
 import { TrainingCampListComponent } from './training-camp/training-camp-list.component';
 import { HttpTrainingCampService } from './training-camp/http-training-camp-service';
 import { TrainingCampUpdateComponent } from './training-camp/training-camp-update/training-camp-update.component';
+import { ReservationNewComponent } from './reservation/reservation-new/reservation-new.component';
+import { HttpClientService } from './client/http-client-service';
+import { ReservationNewGuard } from './reservation/reservation-new/reservation-new.guard';
+import { ReservationResolver } from './reservation/reservation-list/reservation-resolver';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,7 @@ import { TrainingCampUpdateComponent } from './training-camp/training-camp-updat
     ReservationUpdateComponent,
     TrainingCampListComponent,
     TrainingCampUpdateComponent,
+    ReservationNewComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,8 @@ import { TrainingCampUpdateComponent } from './training-camp/training-camp-updat
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
-      { path: 'reservations', component: ReservationListComponent },
+      { path: 'reservations', component: ReservationListComponent, resolve: {reservations : ReservationResolver} },
+      { path: 'reservations-new', canDeactivate : [ReservationNewGuard] , component: ReservationNewComponent },
       { path: 'reservations/:id', component: ReservationUpdateComponent },
       { path: 'courts', component: CourtListComponent },
       { path: 'training-camp', component: TrainingCampListComponent },
@@ -43,7 +49,7 @@ import { TrainingCampUpdateComponent } from './training-camp/training-camp-updat
     ]),
 
   ],
-  providers: [HttpReservationService, HttpCoachService, HttpCourtService, HttpTrainingCampService],
+  providers: [HttpReservationService, HttpCoachService, HttpCourtService, HttpTrainingCampService, HttpClientService, ReservationResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

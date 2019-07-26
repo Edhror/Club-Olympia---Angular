@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Court } from './court';
+import { ItemForSelection } from 'src/app/coach/item-for-selection';
 
 export class HttpCourtService{
-    url = "http://localhost:8080/court/list";
+    url = "http://localhost:8080/api/courts";
     constructor(private http: HttpClient){}
 
     byId(id: number) : Observable<Court>{
@@ -11,7 +12,7 @@ export class HttpCourtService{
         return this.http.get<Court>(this.url + "/" + id);
     }
 
-    getAll(): Observable<Court[]>{
-        return this.http.get<Court[]>(this.url);
+    getAll(): Observable<ItemForSelection[]>{
+        return this.http.get<ItemForSelection[]>(this.url);
     }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Reservation } from './reservation';
 import { Observable } from 'rxjs';
 
@@ -6,6 +6,12 @@ export class HttpReservationService{
 
     url = "http://localhost:8080/api/reservations";
     constructor(private http: HttpClient){}
+
+    add(res :Reservation) : Observable<string[]> {
+
+        const head = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.post<string[]>(this.url, res, {headers : head});
+    }
 
     byId(id: number) : Observable<Reservation>{
         console.log("chiamato byId");

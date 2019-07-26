@@ -1,0 +1,12 @@
+.card {
+    width: 800px
+}
+input, select {
+    margin-bottom: 10px
+}
+span.help-block {
+    background-color: #ea6a6a;
+    padding: 7px;
+    border-radius: 5px;
+    color: white;
+}

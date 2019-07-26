@@ -1,7 +1,8 @@
 export class Reservation {
 
+
     constructor(private _id: number, private _start: String,
-        private _end: String, private _cost: number, private _courtId: number, private _coachId: number) {
+        private _end: String, private _cost: number, private _courtId: number, private _clientId: number) {
     }
 
     public get courtId(): number {
@@ -34,11 +35,23 @@ export class Reservation {
     public set id(value: number) {
         this._id = value;
     }
-    public get coachId(): number {
-        return this._coachId;
+
+    public get clientId(): number {
+        return this._clientId;
     }
-    public set coachId(value: number) {
-        this._coachId = value;
+    public set clientId(value: number) {
+        this._clientId = value;
     }
-    
+
+    public toJSON() {
+        return {
+            start: this.start,
+            end: this.end,
+            clientId: this.clientId,
+            courtId: this.courtId,
+            cost: this.cost
+        };
+    }
+
+
 }

@@ -12,24 +12,50 @@ export class ReservationListComponent implements OnInit {
 
   start: string;
   end: string;
-  reservations: Reservation [];
+  
+  reservations: Reservation[];
 
-  constructor(private route: ActivatedRoute,private reservationService: HttpReservationService) { }
+  constructor(private route: ActivatedRoute, private reservationService: HttpReservationService) { }
 
   ngOnInit() {
 
     this.loadReservations();
-      
+
   }
-  delete(id:number): void {
+  delete(id: number): void {
 
     this.reservationService.delete(id).subscribe(() => this.loadReservations());
   }
 
-  loadReservations(): void{
+  wait(time: number){
+    let startDelay = new Date().getTime();
+    let endDelay = startDelay;
+    while(endDelay < startDelay+time){
+      endDelay = new Date().getTime();
+    }
+  }
+
+  loadReservations(): void {
+
+    this.wait(2000);
+    this.reservations = this.route.snapshot.data['reservations'];
+  }
+
+  filterReservations() {
     this.reservationService.getReservations(this.start, this.end).subscribe(
-      rss => { this.reservations=rss;
+      rss => {
+      this.reservations = rss;
         console.log(this.reservations);
+      }
+    );
+  }
+
+  clearFilter(): void {
+    this.reservationService.getReservations("", "").subscribe(
+      rss => {
+        this.reservations = rss;
+        this.start = "";
+        this.end= "";
       }
     );
   }

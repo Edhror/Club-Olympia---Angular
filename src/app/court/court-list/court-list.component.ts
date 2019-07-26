@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Court } from './court';
 import { HttpCourtService } from './http-court-service';
+import { ItemForSelection } from 'src/app/coach/item-for-selection';
 
 @Component({
   selector: 'app-court-list',
@@ -9,7 +10,7 @@ import { HttpCourtService } from './http-court-service';
 })
 export class CourtListComponent implements OnInit {
 
-  courts: Court [];
+  courts: ItemForSelection [];
 
   constructor(private courtService: HttpCourtService) { }
 

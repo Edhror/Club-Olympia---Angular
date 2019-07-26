@@ -1,8 +1,31 @@
-<input type="datetime-local"  [(ngModel)]= 'start'>
-<input type="datetime-local"  [(ngModel)]= 'end'>
-<button (click)="loadReservations()">Filter</button>
-<table *ngIf="reservations && reservations.length" class="table">
-    <thead>
+<div class="row  mb-3 mt-3">
+    <div class="col-md-4">
+        <div class="input-group" >
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Start time</span>
+            </div>
+            <input type="datetime-local" class="form-control"  [(ngModel)]= 'start' aria-label="Starttime" aria-describedby="basic-addon1">
+        
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">End time</span>
+            </div>
+            <input type="datetime-local" class="form-control" [(ngModel)]= 'end' aria-label="endtime" aria-describedby="basic-addon1">
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <button class="btn btn-primary" (click)="filterReservations()">Filter</button>
+        <button class="btn btn-primary ml-2" (click)="clearFilter()">Clear</button>
+    </div>
+</div>
+
+<table *ngIf="reservations && reservations.length" class="table table-striped">
+    <thead class="table-dark">
         <tr>
             <th>Id</th>
             <th>Start time</th>
@@ -27,3 +50,5 @@
         </tr>
     </tbody>
 </table>
+
+<button [routerLink]="['/reservations-new']" class="btn btn-success">Add Reservation</button>

@@ -1,0 +1,101 @@
+<div class="card">
+    <div class="card-header">
+        New reservation
+    </div>
+
+    <div class="card-body">
+        <form class="form-horizontal" novalidate (ngSubmit)="add()" [formGroup]="reservationForm">
+            <fieldset>
+                <div formGroupName="timeGroup" [ngClass]="{'is-invalid': reservationForm.get('timeGroup').errors}">
+                    <div class="form-group row"
+                        [ngClass]="{'is-invalid': (reservationForm.get('timeGroup.start').touched || reservationForm.get('timeGroup.start').dirty) && !reservationForm.get('timeGroup.start').valid }">
+                        <label class="col-md-3 col-form-label ticket" for="startId">Reservation start time</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="startId" type="datetime-local"
+                                placeholder="Reservation start (required)" 
+                                formControlName="start" />
+                            <span class="help-block"
+                                *ngIf="(reservationForm.get('timeGroup.start').touched || reservationForm.get('timeGroup.start').dirty) && reservationForm.get('timeGroup.start').errors">
+                                <span *ngIf="reservationForm.get('timeGroup.start').errors.required">
+                                    Please enter your reservation start date.
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row"
+                        [ngClass]="{'is-invalid': (reservationForm.get('timeGroup.end').touched || reservationForm.get('timeGroup.end').dirty) && !reservationForm.get('timeGroup.end').valid }">
+                        <label class="col-md-3 col-form-label" for="endId">Reservation end time</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="endId" type="datetime-local" placeholder="Reservation end (required)"
+                                formControlName="end" />
+                            <span class="help-block"
+                                *ngIf="(reservationForm.get('timeGroup.end').touched || reservationForm.get('timeGroup.end').dirty) && reservationForm.get('timeGroup.end').errors">
+                                <span *ngIf="reservationForm.get('timeGroup.end').errors.required">
+                                    Please enter your reservation end date.
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="clientId">Client</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="clientId" formControlName="clientId">
+                            <option selected *ngFor="let c of clients" [value]="c.id">{{c.name}}</option>
+                        </select>
+
+                        <span class="help-block"
+                            *ngIf="(reservationForm.get('clientId').touched || reservationForm.get('clientId').dirty) && reservationForm.get('clientId').errors">
+                            <span *ngIf="reservationForm.get('clientId').errors.required">
+                                Please select the client name.
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="courtId">Court</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="courtId" formControlName="courtId">
+                            <option selected *ngFor="let cr of courts" [value]="cr.id">{{cr.name}}</option>
+                        </select>
+                        <span class="help-block"
+                            *ngIf="(reservationForm.get('courtId').touched || reservationForm.get('courtId').dirty) && reservationForm.get('courtId').errors">
+                            <span *ngIf="reservationForm.get('courtId').errors.required">
+                                Please enter the court name.
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="cost">Cost</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="cost" placeholder="Cost" formControlName="cost">
+                        <span class="help-block"
+                            *ngIf="(reservationForm.get('cost').touched || reservationForm.get('cost').dirty) && reservationForm.get('cost').errors">
+                            <span *ngIf="reservationForm.get('cost').errors.required">
+                                Please enter the cost.
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="">
+                        <span>
+                            <button class="btn btn-primary" type="submit" [disabled]="!reservationForm.valid">
+                                add reservation
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <div *ngIf="showError" class="alert alert-danger">
+            Time is reserved
+        </div>
+
+        <div *ngIf="availableTimes" class="alert alert-info">
+            <label *ngFor= "let t of availableTimes">Available time to make reservation : {{t}} <br></label>
+        </div>
+    </div>
+</div>
